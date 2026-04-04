@@ -5,7 +5,7 @@
 
     <groupId>com.gotospawn</groupId>
     <artifactId>goto-spawn-plugin</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>GotoSpawn</name>
@@ -14,7 +14,7 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <minecraft.version>1.21.1-R0.1-SNAPSHOT</minecraft.version>
+        <minecraft.version>26.1.1-R0.1-SNAPSHOT</minecraft.version>
     </properties>
 
     <repositories>
