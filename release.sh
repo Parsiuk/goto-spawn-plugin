@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Read version from pom.xml
-VERSION=$(grep -m1 '<version>' pom.xml | sed 's/.*<version>\(.*\)<\/version>.*/\1/')
+# Read version from build.gradle.kts
+VERSION=$(grep '^version' build.gradle.kts | sed 's/version = "\(.*\)"/\1/')
 TAG="v${VERSION}"
 
-echo "Version from pom.xml: ${VERSION}"
+echo "Version from build.gradle.kts: ${VERSION}"
 echo "Git tag: ${TAG}"
 
 # Ensure we're on master and up to date
@@ -19,7 +19,7 @@ git pull --ff-only origin master
 
 # Check if tag already exists
 if git rev-parse "$TAG" >/dev/null 2>&1; then
-    echo "Tag ${TAG} already exists. Bump the version in pom.xml first."
+    echo "Tag ${TAG} already exists. Bump the version in build.gradle.kts first."
     exit 1
 fi
 
