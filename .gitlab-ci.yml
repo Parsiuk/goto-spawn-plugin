@@ -3,38 +3,35 @@ stages:
   - build
   - release
 
-variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-
 cache:
   paths:
-    - .m2/repository
+    - .gradle/
 
 lint:
   stage: lint
-  image: maven:3.9-eclipse-temurin-21
+  image: eclipse-temurin:25
   script:
-    - mvn validate compile -DskipTests
+    - ./gradlew classes
 
 build:
   stage: build
-  image: maven:3.9-eclipse-temurin-21
+  image: eclipse-temurin:25
   script:
-    - mvn clean package -DskipTests
+    - ./gradlew clean jar
   artifacts:
     paths:
-      - target/*.jar
+      - build/libs/*.jar
     expire_in: 1 week
 
 build-release:
   stage: build
-  image: maven:3.9-eclipse-temurin-21
+  image: eclipse-temurin:25
   script:
-    - mvn clean package -DskipTests
-    - mv target/goto-spawn-plugin-*.jar target/goto-spawn-${CI_COMMIT_TAG}.jar
+    - ./gradlew clean jar
+    - mv build/libs/goto-spawn-plugin-*.jar build/libs/goto-spawn-${CI_COMMIT_TAG}.jar
     - |
       curl --header "JOB-TOKEN: $CI_JOB_TOKEN" \
-           --upload-file target/goto-spawn-${CI_COMMIT_TAG}.jar \
+           --upload-file build/libs/goto-spawn-${CI_COMMIT_TAG}.jar \
            "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/goto-spawn/${CI_COMMIT_TAG}/goto-spawn-${CI_COMMIT_TAG}.jar"
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/

@@ -1,5 +1,5 @@
 name: GotoSpawn
-version: '${project.version}'
+version: '${version}'
 main: com.gotospawn.GotoSpawnPlugin
 api-version: '26.1'
 description: Teleport between spawn and bed with /goto command
