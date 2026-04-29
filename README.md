@@ -1,20 +1,29 @@
 # GotoSpawn
 
-A simple Paper plugin that lets players teleport between world spawn and their bed using the `/goto` command. Teleportation is restricted — players must be within 16 blocks of the destination anchor point (bed for `/goto spawn`, world spawn for `/goto bed`).
+A simple Paper plugin that lets players teleport between world spawn and their bed using the `/goto` command. Teleportation is restricted — players must be within a configurable distance of the destination anchor point (bed for `/goto spawn`, world spawn for `/goto bed`).
 
 ## Usage
 
 | Command | Description |
 |---|---|
-| `/goto spawn` | Teleport to world spawn (must be within 16 blocks of your bed) |
-| `/goto bed` | Teleport to your bed (must be within 16 blocks of world spawn) |
+| `/goto spawn` | Teleport to world spawn (must be within N blocks of your bed) |
+| `/goto bed` | Teleport to your bed (must be within N blocks of world spawn) |
+| `/gotoreload` | Reload the plugin configuration (requires `goto.admin`) |
 
 Players must have a bed or respawn point set for either subcommand to work.
 
 ## Requirements
 
-- Paper 1.21+
+- Paper 26.1+
 - Java 21+
+
+## Configuration
+
+- File: `plugins/GotoSpawn/goto.conf` (YAML)
+- Options:
+	- `max-distance`: Maximum allowed distance in blocks (default: 16.0, min: 1, max: 48). Values outside this range are clamped.
+
+Create the file on first run or edit and use `/gotoreload` to apply changes.
 
 ## Building
 
