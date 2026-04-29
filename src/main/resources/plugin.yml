@@ -8,3 +8,12 @@ commands:
   goto:
     description: Teleport to spawn or bed
     usage: /<command> <spawn|bed>
+  gotoreload:
+    description: Reload GotoSpawn configuration
+    usage: /<command>
+    permission: goto.admin
+
+permissions:
+  goto.admin:
+    description: Allows reloading GotoSpawn configuration
+    default: op

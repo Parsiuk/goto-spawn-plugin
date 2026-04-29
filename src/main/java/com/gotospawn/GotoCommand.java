@@ -13,9 +13,12 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class GotoCommand implements TabExecutor {
-
-    private static final double MAX_DISTANCE = 16.0;
+    private final GotoSpawnPlugin plugin;
     private static final List<String> SUBCOMMANDS = List.of("spawn", "bed");
+
+    public GotoCommand(GotoSpawnPlugin plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -42,9 +45,10 @@ public class GotoCommand implements TabExecutor {
             return true;
         }
 
-        if (player.getLocation().distanceSquared(bedLocation) > MAX_DISTANCE * MAX_DISTANCE) {
+        double max = plugin.getMaxDistance();
+        if (player.getLocation().distanceSquared(bedLocation) > max * max) {
             player.sendMessage(Component.text(
-                    "You must be within " + (int) MAX_DISTANCE + " blocks of your bed to use this.",
+                "You must be within " + (int) max + " blocks of your bed to use this.",
                     NamedTextColor.RED));
             return true;
         }
@@ -64,9 +68,10 @@ public class GotoCommand implements TabExecutor {
 
         Location spawnLocation = getOverworld(player.getServer()).getSpawnLocation();
 
-        if (player.getLocation().distanceSquared(spawnLocation) > MAX_DISTANCE * MAX_DISTANCE) {
+        double max = plugin.getMaxDistance();
+        if (player.getLocation().distanceSquared(spawnLocation) > max * max) {
             player.sendMessage(Component.text(
-                    "You must be within " + (int) MAX_DISTANCE + " blocks of world spawn to use this.",
+                "You must be within " + (int) max + " blocks of world spawn to use this.",
                     NamedTextColor.RED));
             return true;
         }
