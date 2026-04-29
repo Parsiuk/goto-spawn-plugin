@@ -12,13 +12,13 @@ cache:
 
 lint:
   stage: lint
-  image: eclipse-temurin:25
+  image: eclipse-temurin:21
   script:
     - ./gradlew classes
 
 build:
   stage: build
-  image: eclipse-temurin:25
+  image: eclipse-temurin:21
   script:
     - ./gradlew clean jar
   artifacts:
@@ -28,7 +28,7 @@ build:
 
 build-release:
   stage: build
-  image: eclipse-temurin:25
+  image: eclipse-temurin:21
   script:
     - ./gradlew clean jar
     - mv build/libs/goto-spawn-plugin-*.jar build/libs/goto-spawn-${CI_COMMIT_TAG}.jar
