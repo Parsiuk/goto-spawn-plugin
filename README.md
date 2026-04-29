@@ -19,10 +19,10 @@ Players must have a bed or respawn point set for either subcommand to work.
 ## Building
 
 ```sh
-mvn clean package
+./gradlew clean build
 ```
 
-The compiled JAR will be in `target/`. Copy it to your server's `plugins/` directory and restart.
+The compiled JAR will be in `build/libs/`. Copy it to your server's `plugins/` directory and restart.
 
 ## Contributing
 
