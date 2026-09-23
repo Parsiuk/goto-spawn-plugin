@@ -14,7 +14,7 @@ Players must have a bed or respawn point set for either subcommand to work.
 
 ## Requirements
 
-- Paper 26.2+
+- Paper 26.3+
 - Java 25+
 
 ## Configuration
